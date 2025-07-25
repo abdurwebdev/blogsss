@@ -55,18 +55,21 @@ router.post("/login",async (req,res)=>{
   }
 })
 
-router.get("/home",verifyToken,(req,res)=>{
+router.get("/home", verifyToken, (req, res) => {
   try {
     const decode = req.user;
+    console.log("User from token:", decode); // 👈 Add this log
+
     res.json({
-      username:decode.username,
-      email:decode.email,
-      bio:decode.bio
-    })
+      username: decode.username,
+      email: decode.email,
+      bio: decode.bio
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({error:"Something went wrong!"})
+    console.error("Error in /home route:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-})
+});
+
 
 module.exports = router;
