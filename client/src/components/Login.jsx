@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-function Register(){
+import { Link, useNavigate } from 'react-router-dom';
+function Login(){
   let [email,setEmail] = useState('');
   let [password,setPassword] = useState('');
+  const navigate = useNavigate();
   const handleLogin = async (e) =>{
     e.preventDefault();
     try {
@@ -14,6 +15,7 @@ function Register(){
         withCredentials:true
       })
       alert(res.data);
+      navigate('/home')
     } catch (error) {
       alert("Error: "+error.message);
     }
@@ -39,4 +41,4 @@ function Register(){
   )
 }
 
-export default Register;
+export default Login;
